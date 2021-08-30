@@ -28,9 +28,12 @@ public class Order {
     @OneToMany(mappedBy = "order")
     private List<OrderItem> orderItems = new ArrayList<>();
 
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "delivery_id")
     private Delivery delivery;
 
     private LocalDateTime orderDate; //주문 시간
 
+    @Enumerated(EnumType.STRING) //ordinal 절대 쓰면 안됌
     private OrderStatus orderStatus; //주문상태 ORDER, CANCEL
 }
