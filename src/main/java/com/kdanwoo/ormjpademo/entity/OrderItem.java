@@ -1,6 +1,6 @@
 package com.kdanwoo.ormjpademo.entity;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.kdanwoo.ormjpademo.entity.item.Item;
 import lombok.Getter;
 import lombok.Setter;
 
