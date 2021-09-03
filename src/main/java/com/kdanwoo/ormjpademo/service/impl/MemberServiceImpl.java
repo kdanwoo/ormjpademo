@@ -12,7 +12,7 @@ import java.util.List;
 
 @Service
 @Slf4j
-@RequiredArgsConstructor
+@RequiredArgsConstructor //final 필드변수만 가진 생성자를 생성해주는 어노테이션
 @Transactional(readOnly = true) //데이터의 변경 작업은 트랜잭션안에서 수행되어야 한다.
 public class MemberServiceImpl implements MemberService {
 
