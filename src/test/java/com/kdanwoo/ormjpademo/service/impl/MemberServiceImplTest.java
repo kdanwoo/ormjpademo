@@ -44,7 +44,7 @@ public class MemberServiceImplTest {
         assertEquals(member, memberRepository.findOne(savedId));
     }
     
-    @Test
+    @Test(expected = IllegalStateException.class)
     public void duplicatedMemberException() throws Exception{
         //given
          Member member1 = new Member();
@@ -55,11 +55,8 @@ public class MemberServiceImplTest {
 
         //when
         memberService.join(member1);
-        try{
-            memberService.join(member2); //예외가 발생해야 한다.
-        }catch (IllegalStateException e){
-            return;
-        }
+        memberService.join(member2); //예외가 발생해야 한다.
+
         //then
     }
 }
