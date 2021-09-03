@@ -9,4 +9,5 @@ public interface MemberService {
     Long join(Member member);
     //회원전체조회 기능
     List<Member> findMembers();
+    Member findOne(Long id);
 }
