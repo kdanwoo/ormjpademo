@@ -45,11 +45,21 @@ public class MemberServiceImplTest {
     }
     
     @Test
-    public void 중복회원예외() throws Exception{
+    public void duplicatedMemberException() throws Exception{
         //given
-         
+         Member member1 = new Member();
+         member1.setName("kim");
+
+        Member member2 = new Member();
+        member2.setName("kim");
+
         //when
-        
+        memberService.join(member1);
+        try{
+            memberService.join(member2); //예외가 발생해야 한다.
+        }catch (IllegalStateException e){
+            return;
+        }
         //then
     }
 }
