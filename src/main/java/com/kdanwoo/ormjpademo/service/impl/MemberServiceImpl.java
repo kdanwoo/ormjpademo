@@ -22,7 +22,7 @@ public class MemberServiceImpl implements MemberService {
      * 회원 가입 기능
      * */
     @Override
-    @Transactional(readOnly = true)
+    @Transactional
     public Long join(Member member) {
         validateDuplicateMember(member);
         memberRepository.save(member); //영속성컨텍스트가 키를 pk관리하는거

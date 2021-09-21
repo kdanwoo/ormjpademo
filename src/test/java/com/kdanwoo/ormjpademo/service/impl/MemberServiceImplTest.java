@@ -30,7 +30,7 @@ public class MemberServiceImplTest {
     EntityManager em;
 
     @Test
-    //@Rollback(false) //원래는 롤백되는데 눈으로 확인하고 싶은 경우에 체크 해둠!
+    @Rollback(false) //원래는 롤백되는데 눈으로 확인하고 싶은 경우에 체크 해둠!
     public void join() throws Exception{
         //given
         Member member = new Member();
