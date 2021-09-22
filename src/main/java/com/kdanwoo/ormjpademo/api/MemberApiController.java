@@ -4,10 +4,13 @@ import com.kdanwoo.ormjpademo.entity.Member;
 import com.kdanwoo.ormjpademo.service.MemberService;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequiredArgsConstructor
@@ -39,6 +42,33 @@ public class MemberApiController {
         memberService.update(id,request.getName());
         Member findMember = memberService.findOne(id); //위에와 분리, 커맨드와 쿼리를 분리하는걸로!!
         return new UpdateMemberResponse(findMember.getId(), findMember.getName());
+    }
+
+    @GetMapping("/api/v1/members")
+    public List<Member> membersV1(){ //엔티티를 노출하는것,, 외부에 필요하지 않은 정보까지 노출하는경우가 생긴다. 방법1 - JsonIgnore 사용.. 이게 정답은 아님.
+        return memberService.findMembers();
+    }
+
+    @GetMapping("/api/v2/members")
+    public Result membersV2(){
+        List<Member> findMembers = memberService.findMembers();
+        List<MemberDto> collect = findMembers.stream()
+                .map(m -> new MemberDto(m.getName()))
+                .collect(Collectors.toList());
+
+        return new Result(collect);
+    }
+
+    @Data
+    @AllArgsConstructor
+    static class Result<T>{
+        private T data;
+    }
+
+    @Data
+    @AllArgsConstructor
+    static class MemberDto{
+        private String name;
     }
 
     @Data
