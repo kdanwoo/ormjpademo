@@ -1,5 +1,10 @@
 package com.kdanwoo.ormjpademo.service;
 
+import com.kdanwoo.ormjpademo.entity.Order;
+import com.kdanwoo.ormjpademo.repository.OrderSearch;
+
+import java.util.List;
+
 public interface OrderService {
 
     //주문
@@ -9,5 +14,5 @@ public interface OrderService {
     void cancelOrder(Long orderId);
 
     //검색
-    //List<Order> findOrders(OrderSearch orderSearch);
+    List<Order> findOrders(OrderSearch orderSearch);
 }

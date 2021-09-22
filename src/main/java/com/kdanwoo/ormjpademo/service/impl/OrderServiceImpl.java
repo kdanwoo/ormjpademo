@@ -9,6 +9,7 @@ import com.kdanwoo.ormjpademo.enums.DeliveryStatus;
 import com.kdanwoo.ormjpademo.repository.ItemRepository;
 import com.kdanwoo.ormjpademo.repository.MemberRepository;
 import com.kdanwoo.ormjpademo.repository.OrderRepository;
+import com.kdanwoo.ormjpademo.repository.OrderSearch;
 import com.kdanwoo.ormjpademo.service.OrderService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -55,17 +56,15 @@ public class OrderServiceImpl implements OrderService {
     /** 주문 취소 */
     @Transactional
     public void cancelOrder(Long orderId) {
-
         //주문 엔티티 조회
         Order order = orderRepository.findOne(orderId);
-
 
         //주문 취소
         order.cancel();
     }
 
-//    @Override
-//    public List<Order> findOrders(OrderSearch orderSearch) {
-//        return null;
-//    }
+    @Override
+    public List<Order> findOrders(OrderSearch orderSearch) {
+        return null;
+    }
 }
