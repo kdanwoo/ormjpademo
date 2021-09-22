@@ -41,6 +41,14 @@ public class MemberServiceImpl implements MemberService {
         return memberRepository.findOne(memberId);
     }
 
+    @Override
+    @Transactional
+    public void update(Long id, String name) {
+        //jpa의 변경 감지 기능을 사용한다
+        Member member = memberRepository.findOne(id);
+        member.setName(name); //트랙잭션 종료시 -> commit이 된다. jpa flush
+    }
+
     private void validateDuplicateMember(Member member) {
         List<Member> findMembers = memberRepository.findByName(member.getName());
 
