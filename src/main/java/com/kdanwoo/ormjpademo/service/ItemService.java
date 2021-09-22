@@ -8,4 +8,6 @@ public interface ItemService {
     void saveItem(Item item);
     List<Item> findItems();
     Item findOne(Long itemId);
+
+    void updateItem(Long id, String name, int price);
 }
