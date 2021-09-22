@@ -9,5 +9,5 @@ public interface ItemService {
     List<Item> findItems();
     Item findOne(Long itemId);
 
-    void updateItem(Long id, String name, int price);
+    void updateItem(Long id, String name, int price, int stockQuantity);
 }

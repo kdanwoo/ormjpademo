@@ -45,10 +45,11 @@ public class ItemServiceImpl implements ItemService {
 
     @Transactional
     @Override
-    public void updateItem(Long id, String name, int price) {
+    public void updateItem(Long id, String name, int price, int stockQuantity) {
         Item item = itemRepository.findOne(id);
         item.setName(name);
         item.setPrice(price);
+        item.setStockQuantity(stockQuantity);
     }
 
 }
