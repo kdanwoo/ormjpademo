@@ -1,5 +1,6 @@
 package com.kdanwoo.ormjpademo.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.kdanwoo.ormjpademo.enums.DeliveryStatus;
 import lombok.Getter;
 import lombok.Setter;
@@ -16,6 +17,7 @@ public class Delivery {
     @Column(name = "delivery_id")
     private Long id;
 
+    @JsonIgnore
     @OneToOne(mappedBy = "delivery",fetch = FetchType.LAZY)
     private Order order;
 
