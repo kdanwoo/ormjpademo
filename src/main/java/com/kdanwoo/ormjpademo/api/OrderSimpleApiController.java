@@ -5,10 +5,10 @@ import com.kdanwoo.ormjpademo.entity.Order;
 import com.kdanwoo.ormjpademo.enums.OrderStatus;
 import com.kdanwoo.ormjpademo.repository.OrderRepository;
 import com.kdanwoo.ormjpademo.repository.OrderSearch;
+import com.kdanwoo.ormjpademo.repository.SimpleOrderQueryDto;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.aspectj.weaver.ast.Or;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -52,6 +52,11 @@ public class OrderSimpleApiController {
         List<Order> orders = orderRepository.findAllWithMemberDelivery();
         List<SimpleOrderDro> result = orders.stream().map(o -> new SimpleOrderDro(o)).collect(Collectors.toList());
         return result;
+    }
+
+    @GetMapping("/api/v4/simple-orders")
+    public List<SimpleOrderQueryDto> ordersV4(){ //간단한 주문 조회 V4: JPA에서 DTO로 바로 조회
+        return orderRepository.findOrderDtos();
     }
 
     @Data

@@ -1,5 +1,6 @@
 package com.kdanwoo.ormjpademo.repository;
 
+import com.kdanwoo.ormjpademo.api.OrderSimpleApiController;
 import com.kdanwoo.ormjpademo.entity.Order;
 import lombok.RequiredArgsConstructor;
 import org.aspectj.weaver.ast.Or;
@@ -108,6 +109,15 @@ public class OrderRepository {
                         " join fetch o.member m" +
                         " join fetch o.delivery d", Order.class)
                 .getResultList();
+
+    }
+
+    public List<SimpleOrderQueryDto> findOrderDtos() {
+        return em.createQuery(
+                "select new com.kdanwoo.ormjpademo.repository.SimpleOrderQueryDto(o.id, m.name, o.orderDate, o.orderStatus, d.address)" +
+                        " from Order o" +
+                        " join o.member m" +
+                        " join o.delivery d", SimpleOrderQueryDto.class).getResultList();
 
     }
 }
