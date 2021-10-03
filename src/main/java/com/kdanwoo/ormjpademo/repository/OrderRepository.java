@@ -103,7 +103,9 @@ public class OrderRepository {
     }
 
     public List<Order> findAllWithMemberDelivery() {
-
+        /**
+         * 먼저 ToOne(OneToOne, ManyToOne) 관계를 모두 페치조인 한다. ToOne 관계는 row수를 증가시키지 않으므로 페이징 쿼리에 영향을 주지 않는다.
+         * */
         return em.createQuery( //패치조인!!! -> 단순하지 않고 성능이 중요해.
                 "select o from Order o" +
                         " join fetch o.member m" +
@@ -129,5 +131,18 @@ public class OrderRepository {
                         " join fetch o.orderItems oi" +
                         " join fetch oi.item i", Order.class).getResultList();
 
+    }
+
+    public List<Order> findAllWithMemberDelivery(int offset, int limit) {
+        /**
+         * 먼저 ToOne(OneToOne, ManyToOne) 관계를 모두 페치조인 한다. ToOne 관계는 row수를 증가시키지 않으므로 페이징 쿼리에 영향을 주지 않는다.
+         * */
+        return em.createQuery( //패치조인!!! -> 단순하지 않고 성능이 중요해.
+                "select o from Order o" +
+                        " join fetch o.member m" +
+                        " join fetch o.delivery d", Order.class)
+                .setFirstResult(offset)
+                .setMaxResults(limit)
+                .getResultList();
     }
 }
