@@ -6,6 +6,8 @@ import com.kdanwoo.ormjpademo.entity.OrderItem;
 import com.kdanwoo.ormjpademo.enums.OrderStatus;
 import com.kdanwoo.ormjpademo.repository.OrderRepository;
 import com.kdanwoo.ormjpademo.repository.OrderSearch;
+import com.kdanwoo.ormjpademo.repository.query.OrderQueryDto;
+import com.kdanwoo.ormjpademo.repository.query.OrderQueryRepository;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.aspectj.weaver.ast.Or;
@@ -22,6 +24,7 @@ import java.util.stream.Collectors;
 public class OrderApiController {
 
     private final OrderRepository orderRepository;
+    private final OrderQueryRepository orderQueryRepository;
 
     @GetMapping("/api/v1/orders")
     public List<Order> ordersV1(){
@@ -66,6 +69,11 @@ public class OrderApiController {
         List<OrderDto> collect = orders.stream().map(order -> new OrderDto(order)).collect(Collectors.toList());
 
         return collect;
+    }
+
+    @GetMapping("/api/v4/orders")
+    public List<OrderQueryDto> ordersV4(){
+        return orderQueryRepository.findOrderQueryDtos();
     }
 
     @Data
