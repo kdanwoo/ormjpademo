@@ -6,10 +6,7 @@ import com.kdanwoo.ormjpademo.entity.Order;
 import com.kdanwoo.ormjpademo.entity.OrderItem;
 import com.kdanwoo.ormjpademo.entity.item.Item;
 import com.kdanwoo.ormjpademo.enums.DeliveryStatus;
-import com.kdanwoo.ormjpademo.repository.ItemRepository;
-import com.kdanwoo.ormjpademo.repository.MemberRepository;
-import com.kdanwoo.ormjpademo.repository.OrderRepository;
-import com.kdanwoo.ormjpademo.repository.OrderSearch;
+import com.kdanwoo.ormjpademo.repository.*;
 import com.kdanwoo.ormjpademo.service.OrderService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -33,7 +30,7 @@ public class OrderServiceImpl implements OrderService {
     public Long order(Long memberId, Long itemId, int count) {
 
         //엔티티 조회
-        Member member = memberRepository.findOne(memberId);
+        Member member = memberRepository.findById(memberId).get();
         Item item = itemRepository.findOne(itemId);
 
         //배송정보 생성

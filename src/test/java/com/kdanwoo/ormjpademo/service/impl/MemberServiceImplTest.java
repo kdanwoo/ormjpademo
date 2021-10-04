@@ -1,7 +1,7 @@
 package com.kdanwoo.ormjpademo.service.impl;
 
 import com.kdanwoo.ormjpademo.entity.Member;
-import com.kdanwoo.ormjpademo.repository.MemberRepository;
+import com.kdanwoo.ormjpademo.repository.MemberRepositoryOld;
 import com.kdanwoo.ormjpademo.service.MemberService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -24,7 +24,7 @@ public class MemberServiceImplTest {
     MemberService memberService;
 
     @Autowired
-    MemberRepository memberRepository;
+    MemberRepositoryOld memberRepository;
 
     @Autowired
     EntityManager em;

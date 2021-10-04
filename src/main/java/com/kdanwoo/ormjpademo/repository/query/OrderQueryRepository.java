@@ -75,9 +75,11 @@ public class OrderQueryRepository {
                 "select new com.kdanwoo.ormjpademo.repository.query.OrderItemQueryDto(oi.order.id, i.name, oi.orderPrice, oi.count)" +
                         " from OrderItem oi" +
                         " join oi.item i" +
-                        " where oi.order.id = : orderId", OrderItemQueryDto.class)
+                        " where oi.order.id in : orderIds", OrderItemQueryDto.class)
                 .setParameter("orderIds", orderIds)
                 .getResultList();
+
+        return orderItems.stream().collect(Collectors.groupingBy(OrderItemQueryDto::getOrderId));
     }
 
     private List<Long> toOrderIds(List<OrderQueryDto> result) {

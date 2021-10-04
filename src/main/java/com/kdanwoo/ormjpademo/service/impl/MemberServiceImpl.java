@@ -2,6 +2,7 @@ package com.kdanwoo.ormjpademo.service.impl;
 
 import com.kdanwoo.ormjpademo.entity.Member;
 import com.kdanwoo.ormjpademo.repository.MemberRepository;
+import com.kdanwoo.ormjpademo.repository.MemberRepositoryOld;
 import com.kdanwoo.ormjpademo.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -38,14 +39,14 @@ public class MemberServiceImpl implements MemberService {
     }
 
     public Member findOne(Long memberId){
-        return memberRepository.findOne(memberId);
+        return memberRepository.findById(memberId).get();
     }
 
     @Override
     @Transactional
     public void update(Long id, String name) {
         //jpa의 변경 감지 기능을 사용한다
-        Member member = memberRepository.findOne(id);
+        Member member = memberRepository.findById(id).get();
         member.setName(name); //트랙잭션 종료시 -> commit이 된다. jpa flush
     }
 
