@@ -18,7 +18,10 @@ public class OrderQueryRepository {
 
         result.forEach(o->{
             List<OrderItemQueryDto> orderItems = findOrderItems(o.getOrderId());
+            o.setOrderItems(orderItems);
         });
+
+        return result;
     }
 
     /**
